@@ -45,10 +45,10 @@
                         </button>
 
                         <br><br>
-                        <button type="button" class="btn btn-warning btn-md"  id="testUsuario"> <!-- usar onclick="testUsuario()" -->
+                        <button type="button" class="btn btn-warning btn-md"  id="testUsuarioBTN"> 
                             <span class="glyphicon glyphicon-cog"></span> Test Usuario
                         </button> 
-                        <button type="button" class="btn btn-warning btn-md" id="testAdmin"> <!-- btn-block (lo hace muy ancho, buscar como reducirlo)" -->
+                        <button type="button" class="btn btn-warning btn-md" id="testAdminBTN"> <!-- btn-block (lo hace muy ancho, buscar como reducirlo)" -->
                             <span class="glyphicon glyphicon-cog"></span> Test Admin
                         </button>
                     </div>
