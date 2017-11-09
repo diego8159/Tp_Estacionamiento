@@ -7,7 +7,7 @@ sleep(2);
 $password = $_POST['password'];
 $usuario = $_POST['usuario'];
 $error =  $_POST['error'];
-$cookies = $_POST['cookies'];
+$recordar = $_POST['recordar'];
 
 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM empleados WHERE mail = '$usuario' AND clave = '$password' ");
@@ -21,13 +21,15 @@ $cantidad = $consulta->rowCount();
  $suspendido = $row['suspendido'];	
 
 if($cantidad == 1 && $suspendido == 'no')
-{
-        if($cookies == "true")
+{   
+        if($recordar == "true")
         {             
             setcookie("login",$usuario,  time()+360000 , '/');         
+            //echo "RECORDANDO!!!";
         }
         else{
             setcookie("login",$usuario,  time()-360000 , '/');
+            //echo "OLVIDANDO!!!";
         }
       
     session_start();
@@ -47,12 +49,13 @@ if($cantidad == 1 && $suspendido == 'no')
         $consulta = $objetoAccesoDato->RetornarConsulta("INSERT into ingresos_empleados (fecha_hora_ingreso,id_empleado)values('$fecha_hora_ingreso','$id')");
         $resultado = $consulta->execute();
     }
-      
+    echo json_encode(array('error' => false, 'usuario' => $usuario,'perfil' => $perfil, 'recordar' => $recordar) );
 }
-if($error == 'false')
-{
-    echo 'error';
-}
+    if($error == 'false')
+    {
+        //echo 'error';
+        echo json_encode(array('error' => true));
+    }
 
 
 ?>
