@@ -32,26 +32,27 @@ mostrarBotones($_SESSION['perfil'],$_SESSION['usuario']);
     </section>
     <!-- Fin del jumbotron -->
 
-<div id="contenido"></div>
-<!-- 
-
+<div id="contenido">
+  
     <div class="container">
         <div class="row">
-            <h2 style="text-align:center">Bienvenido</h2>
+            <h2 class="alert alert-warning" style="text-align:center">Bienvenido</h2>
             <center>
-                <img src="./imagenes/fondo_porDefecto.png">
+                <img class="img-inicio" src="./imagenes/fondo_porDefecto.png" alt="No se pudo visualizar">
             </center>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p class="post-contenido text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
         </div>
     </div>
 
     <br><br>
-    Footer 
+    
     <div class="text-center center-block">
             <p class="txt-railway">- Diego Espa&ntilde;a -</p>
             <br />
@@ -60,8 +61,7 @@ mostrarBotones($_SESSION['perfil'],$_SESSION['usuario']);
                 <a href="https://plus.google.com/u/0/101105611364934944020" target="_blank"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
                 <a href="mailto:diego8159@hotmail.com" target="_blank"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
     </div>
-
--->
+</div>
 
     <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>

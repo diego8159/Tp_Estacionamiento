@@ -27,8 +27,8 @@ include_once "Clases/AccesoDatos.php";
                                                 </a>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li class="disabled"><a href="#">Acciones del empleado</a></li>
-                                                    <li><a href="#">Ingresar Vehiculo</a></li>
-                                                    <li><a href="#">Retirar Vehiculo</a></li>
+                                                    <li><a href="#" id="ingresabtn">Ingresar Vehiculo</a></li>
+                                                    <li><a href="#" id="buscarbtn">Retirar Vehiculo</a></li>
                                                     <li class="divider"></li>
                                                     <li class="disabled"><a href="#">Acciones del administrador</a></li>
                                                     <li><a href="#">Detalles de Empleados</a></li>
@@ -76,7 +76,7 @@ include_once "Clases/AccesoDatos.php";
                                                 </a>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li class="disabled"><a href="#">Acciones del empleado</a></li>
-                                                    <li><a href="#" id="ingresabtn">Ingresa vehiculo</a></li>
+                                                    <li><a href="#" id="ingresabtn">Ingresar vehiculo</a></li>
                                                     <li><a href="#" id="buscarbtn">Retirar Vehiculo</a></li>
                                                 </ul>
                                             </li>
@@ -97,10 +97,10 @@ include_once "Clases/AccesoDatos.php";
         }
     }
 
-    function validarPatenteRepetida($patente)
+    function validarPatenteRepetida($patente)//Verificada
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT patente FROM  cocheras WHERE patente = '$patente'");
+	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT patente FROM operaciones WHERE patente = '$patente'");
 	    $resultado = $consulta->execute();
         $cantidad = $consulta->rowCount();         
         if($cantidad >  0 )
@@ -112,10 +112,10 @@ include_once "Clases/AccesoDatos.php";
         }
     }
 
-    function estaOcupadaCochera($numCochera)
+    function estaOcupadaCochera($numCochera)//Verificada
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM  cocheras WHERE numCochera = '$numCochera'");
+	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM operaciones WHERE numCochera = '$numCochera'");
 	    $resultado = $consulta->execute();
         $cantidad = $consulta->rowCount(); 
         if($cantidad >  0 )
@@ -127,7 +127,7 @@ include_once "Clases/AccesoDatos.php";
         }   
     }
 
-    function validarDiscapacitado($esDisca,$numCochera)
+    function validarDiscapacitado($esDisca,$numCochera)//Verificada
     {
         if(($numCochera == "1_1" || $numCochera == "2_1" || $numCochera == "3_1") && $esDisca == "no") 
             { return true; }
