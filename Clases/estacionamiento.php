@@ -42,7 +42,7 @@ Class Estacionamiento
     }
     
   //--------------------------METODOS----------------------
-    public function IngresarVehiculo()
+    public function IngresarVehiculo()//Verificado --> Probar funcionalidad.
     {
         $validacion = 0;
         $json = array();
@@ -67,9 +67,20 @@ Class Estacionamiento
             $hsIngreso = date("H:i:s");            
             $this->_hsEntradaVehiculo = $hsIngreso;
             $this->_fechaIngreso =date('Y-m-d');
+            $fecha_hora_ingreso = $this->_fechaIngreso . " / " . $hsIngreso;
+            $hsSalida = NULL;
+            $fechaSalida = NULL; 
+            $fecha_hora_salida = $this->fechaSalida . " / " . $hsSalida;
+            $id_empleado_ingreso= $this->_empleado['id'];
+            $tiempo= NULL;
+            $importe= NULL;
+            $tipo= 'alta';
+            /*
+              Para registrar tiempo/importe traer los datos por JSON en el metodo calcular importe.
+            */
 
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    	    	$consulta = $objetoAccesoDato->RetornarConsulta("INSERT into cocheras (numCochera,esDisca,ocupada,marca,patente,color,hsingreso,fechaingreso,empingreso)values('$this->_numCochera','". $this->_objVehiculo->getDiscapacitado() ."','si','". $this->_objVehiculo->getMarca() ."','". $this->_objVehiculo->getPatente() ."','". $this->_objVehiculo->getColor() ."', '$this->_hsEntradaVehiculo', '$this->_fechaIngreso' ,'$this->_empleado')"); 
+    	    	$consulta = $objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,foto,id_empleado_ingreso,fecha_hora_ingreso,id_empleado_ingreso,fecha_hora_salida,tiempo,importe,tipo)values('$this->_numCochera','". $this->_objVehiculo->getDiscapacitado() ."','si','". $this->_objVehiculo->getMarca() ."','". $this->_objVehiculo->getPatente() ."','". $this->_objVehiculo->getColor() ."','". $this->_objVehiculo->getFoto() ."', '$id_empleado_ingreso', '$fecha_hora_ingreso', '$id_empleado_ingreso', '$fecha_hora_salida', '$tiempo' ,'$importe','$tipo')"); 
     		    $resultado = $consulta->execute(); 
             if($resultado)
             {

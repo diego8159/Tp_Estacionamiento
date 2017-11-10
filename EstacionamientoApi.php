@@ -35,11 +35,11 @@ Class EstacionamientoApi
     $user= $arrayDatosLogin['user'];
     $pass = $arrayDatosLogin['password'];
     $respuesta = Estacionamiento::verificarLogin($user,$pass);
-    /*
+    ///*
       if($respuesta->respuesta == "OK" && $user == 'admin'){     
           $rta['token'] = autentificadorJWT::CrearToken($user);    
       }
-    */
+    //*/
     if($respuesta->respuesta == "OK")
     { 
   		$rta['respuesta'] = $respuesta->respuesta;

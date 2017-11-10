@@ -9,15 +9,16 @@ $operacion = $_POST['operacion'];
 session_start();
 switch($operacion)
 {
-    case "alta":
+    case "alta"://Agregar un metodo para guardar foto en carpeta.
         if(empty($_POST['patente']) || 
            empty($_POST['marca']) ||
            empty($_POST['color']) ||
-           $_POST['cochera'] == 0 )     
+           $_POST['cochera'] == 0 ||
+           empty($_POST['foto']) )     
          {
            echo "<center><p class='bg-danger'><b>Faltan completar datos</b></p></center>";  
          }else{
-          $objVehiculo = new Vehiculo ($_POST['patente'],$_POST['marca'],$_POST['color'],$_POST['optradio']);
+          $objVehiculo = new Vehiculo ($_POST['patente'],$_POST['marca'],$_POST['color'],$_POST['optradio'],$_POST['foto']);
           $objEstacionamiento = new Estacionamiento($_POST['cochera'], $objVehiculo);
           echo $objEstacionamiento->IngresarVehiculo(); 
         }
@@ -86,7 +87,6 @@ switch($operacion)
          }
         
        }
-        
      break;
 
      case "movercochera":
@@ -97,7 +97,6 @@ switch($operacion)
        if($retorno){
          registrarOperacion($_SESSION['usuario'],'mover',date('Y-m-d'),$newcochera);
        }
-
      break;
 
 }

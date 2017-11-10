@@ -84,13 +84,13 @@ $(document).ready(function() {
 
                    url:'partes/nexo.php',
                    type:'POST',
-                   data:{operacion:"alta",patente: $('#patente').val(), marca: $('#marca').val(),color: $('#color').val(),optradio: discapacitado,cochera:$('#numCochera').val()},
+                   data:{operacion:"alta",patente: $('#patente').val(), marca: $('#marca').val(),color: $('#color').val(),optradio: discapacitado,cochera:$('#numCochera').val(), foto: $('#foto').val()},
                    async: true,
                    beforeSend: function () {
                              $("#respuesta").html("<center><img src='imagenes/spinner.gif'></center>"); 
                     },
                   success: function (dataRespuesta){
-
+                        console.log(dataRespuesta);
                         var obj = JSON.parse(dataRespuesta);
                         if(obj.msj == "Se ingreso correctamente el vehiculo"){
 

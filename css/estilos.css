@@ -1,6 +1,7 @@
 body {
     background-color: cadetblue;
     /*background-image: url(imagenes/fondo.png);*/
+    /*background-image: url(../imagenes/fondo_login.jpg);*/
 }
 .container {
 	margin-top: 60px;

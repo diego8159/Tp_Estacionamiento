@@ -26,21 +26,21 @@
           <div class="form-group">
             <label for="marca" class="col-sm-2 control-label">Marca</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="marca" name="marca" placeholder="Apellido" name="txtmarca" required>
+              <input type="text" class="form-control" id="marca" name="marca" placeholder="Marca" name="txtmarca" required>
             </div>
           </div>
 
           <div class="form-group">
-                      <label for="color" class="col-sm-2 control-label">Color</label>
-                      <div class="col-sm-10">
-                        <input type="date" class="form-control" id="color" name="color" placeholder="Color" name="txtcolor">
-                      </div>
-                  </div>
-
-                  <div class="form-group">
-            <label for="optradio" class="col-sm-2 control-label">Discapacitado/Embarazada: </label>
-            
+            <label for="color" class="col-sm-2 control-label">Color</label>
             <div class="col-sm-10">
+              <input type="text" class="form-control" id="color" name="color" placeholder="Color" name="txtcolor">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="optradio" class="col-sm-3 control-label">Discapacitado/Embarazada: </label>
+            
+            <div class="col-sm-9">
               <label class="radio-inline">
                 <input type="radio" id="optradiosi" name="optradio" checked> SI
               </label>
@@ -74,9 +74,16 @@
               </select>
             </div>
           </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="usuario">Foto:</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control  input-sm" id="foto" name="foto">
+            </div>
+          </div>
+
           <div class="form-group">
             <center>
-              <a href="index.html" class="btn btn-success">Regresar</a>
                   <button type="button" class="btn btn-primary" id="guardarbtn" > 
                            <span class="glyphicon glyphicon-floppy-disk"></span> Guardar 
                   </button> 
@@ -87,12 +94,14 @@
                           <span class="glyphicon glyphicon-eye-open "></span> Ver cocheras ocupadas
                   </button>
                 </center>
-              </div>
+          </div>
         </form>
 
         <div id="respuesta">
-            </div>
+        </div>
   </div>
+  <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
 
 </body>
 </html>
