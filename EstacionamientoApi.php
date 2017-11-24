@@ -15,12 +15,29 @@ Class EstacionamientoApi
       $color = $arrayDatos['color'];
       $esdisca = $arrayDatos['esDisca'];
       $numcochera = $arrayDatos['numCochera'];
+      $foto  = "/fotos_empleados/".$patente;
 
-      $objVehiculo = new Vehiculo ($patente,$marca,$color,$esdisca);
+      $objVehiculo = new Vehiculo (/*$patente,$marca,$color,$esdisca,$foto*/);
+      $objVehiculo->patente=$patente;
+      $objVehiculo->marca=$marca;
+      $objVehiculo->color=$color;
+      $objVehiculo->esdisca=$esdisca;
+      $objVehiculo->foto=$foto;
       $objEstacionamiento = new Estacionamiento($numcochera, $objVehiculo);
-      $json = $objEstacionamiento->IngresarVehiculo();
+      //$json = $objEstacionamiento->IngresarVehiculo();
+      $objEstacionamiento->IngresarVehiculo();
+
+      $archivos = $request->getUploadedFiles();
+      $destino="./fotos_empleados/";
+      $nombreAnterior=$archivos['foto']->getClientFilename();
+      $extension= explode(".", $nombreAnterior);
+      $extension=array_reverse($extension);
+
+      $foto = $destino.$patente;
+
+      $archivos['foto']->moveTo($destino.$patente.".".$extension[0]);
         
-      $response->getBody()->write($json);
+      $response->getBody()->write("Agregado!!!");//$json
 
       return $response;                  
   }

@@ -24,7 +24,7 @@ $(document).ready(function() {
           */
           $("#contenido").remove();
           $('body').append('<div id="contenido"></div>');//Sin esto funciona igual.
-          $("#contenido").load('partes/formIngreso.php');
+          $("#contenido").load('./partes/formIngreso.php');
        });
 
     
@@ -45,7 +45,7 @@ $(document).ready(function() {
         */
         $("#contenido").remove();
         $('body').append('<div id="contenido"></div>'); 
-        $("#contenido").load('partes/formSalida.php');
+        $("#contenido").load('./partes/formSalida.php');
         });
 
 
@@ -84,7 +84,7 @@ $(document).ready(function() {
 
                    url:'partes/nexo.php',
                    type:'POST',
-                   data:{operacion:"alta",patente: $('#patente').val(), marca: $('#marca').val(),color: $('#color').val(),optradio: discapacitado,cochera:$('#numCochera').val(), foto: $('#foto').val()},
+                   data:{operacion:"alta",patente: $('#patente').val(), marca: $('#marca').val(),color: $('#color').val(),optradio: discapacitado,cochera:$('#numCochera').val(),foto: $('#foto').val()},
                    async: true,
                    beforeSend: function () {
                              $("#respuesta").html("<center><img src='imagenes/spinner.gif'></center>"); 

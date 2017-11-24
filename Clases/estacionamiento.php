@@ -44,26 +44,6 @@ Class Estacionamiento
   //--------------------------METODOS----------------------
     public function IngresarVehiculo()//Verificado --> Probar funcionalidad.
     {
-        $validacion = 0;
-        $json = array();
-
-        if(estaOcupadaCochera($this->_numCochera))
-        {
-            $validacion=1;
-            $json['msj'] = "Esta cochera ya esta ocupada";
-        }
-        if(validarDiscapacitado($this->_objVehiculo->getDiscapacitado(),$this->_numCochera))
-        {
-            $validacion=1;
-            $json['msj'] = "Esta cochera esta reservada para discapacitados";
-        }    
-        if(validarPatenteRepetida($this->_objVehiculo->getPatente()))
-        {
-            $validacion=1;
-            $json['msj'] = "Patente repetida";
-        }
-        if($validacion == 0)
-        {
             $hsIngreso = date("H:i:s");            
             $this->_hsEntradaVehiculo = $hsIngreso;
             $this->_fechaIngreso =date('Y-m-d');
@@ -78,17 +58,24 @@ Class Estacionamiento
             /*
               Para registrar tiempo/importe traer los datos por JSON en el metodo calcular importe.
             */
-
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    	    	$consulta = $objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,foto,id_empleado_ingreso,fecha_hora_ingreso,id_empleado_ingreso,fecha_hora_salida,tiempo,importe,tipo)values('$this->_numCochera','". $this->_objVehiculo->getDiscapacitado() ."','si','". $this->_objVehiculo->getMarca() ."','". $this->_objVehiculo->getPatente() ."','". $this->_objVehiculo->getColor() ."','". $this->_objVehiculo->getFoto() ."', '$id_empleado_ingreso', '$fecha_hora_ingreso', '$id_empleado_ingreso', '$fecha_hora_salida', '$tiempo' ,'$importe','$tipo')"); 
-    		    $resultado = $consulta->execute(); 
-            if($resultado)
-            {
-                registrarOperacion($this->_empleado,'alta',date('Y-m-d'),$this->_numCochera);
-                $json['msj'] = "Se ingreso correctamente el vehiculo";
-            }
-        }
-         return json_encode($json);
+                  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+                  $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,foto,id_empleado_ingreso,fecha_hora_ingreso,id_empleado_ingreso,fecha_hora_salida,tiempo,importe,tipo)values(:numCochera,:esDisca,:ocupada,:marca,:patente,:color,:foto,:id_empleado_ingreso,:fecha_hora_ingreso,:id_empleado_ingreso,:fecha_hora_salida,:tiempo,:importe,:tipo)");
+                  $consulta->bindValue(':numCochera',$this->_numCochera, PDO::PARAM_STR);
+                  $consulta->bindValue(':esDisca', $this->_objVehiculo->getDiscapacitado(), PDO::PARAM_STR);
+                  $consulta->bindValue(':ocupada', 'si', PDO::PARAM_STR);
+                  $consulta->bindValue(':marca', $this->_objVehiculo->getMarca(), PDO::PARAM_STR);
+                  $consulta->bindValue(':patente', $this->_objVehiculo->getPatente(), PDO::PARAM_STR);
+                  $consulta->bindValue(':color', $this->_objVehiculo->getColor(), PDO::PARAM_STR);
+                  $consulta->bindValue(':foto', $this->_objVehiculo->getFoto(), PDO::PARAM_STR);
+                  $consulta->bindValue(':id_empleado_ingreso', $id_empleado_ingreso, PDO::PARAM_INT);
+                  $consulta->bindValue(':fecha_hora_ingreso', $fecha_hora_ingreso, PDO::PARAM_STR);
+                  $consulta->bindValue(':id_empleado_ingreso', $id_empleado_ingreso, PDO::PARAM_INT);
+                  $consulta->bindValue(':fecha_hora_salida', $fecha_hora_salida, PDO::PARAM_STR);
+                  $consulta->bindValue(':tiempo', $tiempo, PDO::PARAM_INT);
+                  $consulta->bindValue(':importe', $importe, PDO::PARAM_STR);
+                  $consulta->bindValue(':tipo', $tipo, PDO::PARAM_STR);
+                  $consulta->execute();   
+                  return $objetoAccesoDato->RetornarUltimoIdInsertado();
     }
 
     public static function buscarVehiculo($patente)

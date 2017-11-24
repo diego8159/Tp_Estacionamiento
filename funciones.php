@@ -31,13 +31,11 @@ include_once "Clases/AccesoDatos.php";
                                                     <li><a href="#" id="buscarbtn">Retirar Vehiculo</a></li>
                                                     <li class="divider"></li>
                                                     <li class="disabled"><a href="#">Acciones del administrador</a></li>
-                                                    <li><a href="#">Detalles de Empleados</a></li>
-                                                    <button type="button" class="btn btn-info btn-sm" id="empleadosbtn">
-                                                        <span class="glyphicon glyphicon-paperclip"></span> <b style= "color:black">Detalles de empleados</b>
-                                                    </button>
-                                                    <li><a href="#">Detalle de Vehiculos</a></li>
-                                                    <li><a href="#">Promedios</a></li>
-                                                    <li><a href="#">Generar PDF</a></li>
+                                                    <li><a href="#" id="empleadosbtn">Detalles de Empleados</a></li>
+                                                    <li><a href="#" id="cocherasbtn">Detalle de Cocheras</a></li>
+                                                    <li><a href="#" id="autosbtn">Detalle de Vehiculos</a></li>
+                                                    <li><a href="#" id="promediosbtn">Promedios</a></li>
+                                                    <li><a href="#" id="pdfbtn">Generar PDF</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> <b>Cerrar sesion <font color="#99FF99">'.$username.'</font></b></a></li>

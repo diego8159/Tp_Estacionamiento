@@ -1,0 +1,20 @@
+{
+  "name": "BootstrapValidator",
+  "description": "ejemplo Bootstrap Validator",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bootstrap-validator": "^0.11.9",
+    "bootstrapvalidator": "bootstrapValidator#^0.5.3"
+  }
+}

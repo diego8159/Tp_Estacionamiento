@@ -1,0 +1,1 @@
+http://www.elwebmaster.com/articulos/acortando-automaticamente-urls-largas-con-php

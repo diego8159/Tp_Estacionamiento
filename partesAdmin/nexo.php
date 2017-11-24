@@ -1,4 +1,5 @@
 <?php
+//sleep(1);
 include_once '../Clases/AccesoDatos.php';
 include_once '../Clases/estacionamiento.php';
 include_once '../Clases/vehiculo.php';
@@ -41,7 +42,7 @@ switch($operacion){
       echo "</div></center>";
     break;
 
-    case 'altaempleado':
+    case 'altaempleado'://--------> Funciona
       $nombre =  $_POST['nombre'];
       $apellido =  $_POST['apellido'];
       $fecha_creacion =  $_POST['fecha_creacion'];
@@ -61,10 +62,10 @@ switch($operacion){
       }
     break;
 
-    case 'borrarempleado':
+    case 'borrarempleado'://--------> Funciona
       $usuario =  $_POST['usuario'];
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM  empleados WHERE usuario = '$usuario'");
+      $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM  empleados WHERE mail = '$usuario'");
       $consulta->execute();
       $cantidad = $consulta->rowCount();
        if($cantidad >0){
@@ -74,11 +75,11 @@ switch($operacion){
       }
     break;
 
-    case 'suspenderempleado':
+    case 'suspenderempleado'://--------> Funciona
       $usuario =  $_POST['usuario'];
       $suspendido = $_POST['suspendido'];
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta(" UPDATE empleados SET suspendido = '$suspendido' WHERE usuario = '$usuario' ");
+      $consulta = $objetoAccesoDato->RetornarConsulta(" UPDATE empleados SET suspendido = '$suspendido' WHERE mail = '$usuario' ");
       $consulta->execute();
       $cantidad = $consulta->rowCount();
        if($cantidad >0){

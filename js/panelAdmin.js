@@ -126,7 +126,8 @@ $(document).ready(function() {
 
 //--------------------------FORM ALTA EMPLEADO------------------------------------
  //ALTA
- $("#btningresar").click(function() {
+ $("#btningresar").click(function(event) {
+    event.preventDefault();
                
      nombre = $("#nombre").val();
      apellido = $("#apellido").val();
@@ -159,7 +160,8 @@ $(document).ready(function() {
 //BAJA
 
 
- $("#btnborrar").click(function() {
+ $("#btnborrar").click(function(event) {
+  event.preventDefault();
                
      usuario = $("#usuario").val();
 
