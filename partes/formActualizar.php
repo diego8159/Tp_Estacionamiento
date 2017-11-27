@@ -67,7 +67,7 @@
 
                                     <br>
                                 
-                                    <input class="btn btn-primary btnactualizar "type="button" value="Actualizar" name="actualizar">
+                                    <input class="btn btn-primary btnactualizar " type="button" value="Actualizar" name="actualizar">
           
        
            

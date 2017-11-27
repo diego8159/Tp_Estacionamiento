@@ -229,20 +229,20 @@ include_once "Clases/AccesoDatos.php";
         return $cantidad;   
     }
 
-    function traerPatentes()
+    function traerPatentes()//Probando...
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT patente,id FROM  cocheras");
+	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT patente,id_empleado_ingreso FROM  operaciones");
 	    $resultado = $consulta->execute();
         $patentes = $consulta->fetchAll();
 	 
         return $patentes; 
     }
 
-    function buscarPorPatente($patente)
+    function buscarPorPatente($patente)//Funciona
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM  cocheras WHERE patente = '$patente'");
+	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM  operaciones WHERE patente = '$patente'");
 	    $resultado = $consulta->execute();
         $cantidad = $consulta->rowCount();
         if($cantidad > 0)
@@ -250,7 +250,7 @@ include_once "Clases/AccesoDatos.php";
             $json_array = array(); 
             while ($row = $consulta->fetch()) 
             {
-                array_push($json_array,array("patente"=>$row['patente'],"marca"=>$row['marca'],"color"=>$row['color'],"esDisca"=>$row['esDisca'],"id"=>$row["id"],"numcochera"=>$row['numCochera']));
+                array_push($json_array,array("patente"=>$row['patente'],"marca"=>$row['marca'],"color"=>$row['color'],"esDisca"=>$row['esDisca'],"id"=>$row["id_empleado_ingreso"],"numcochera"=>$row['numCochera']));
             }
             return  $json_array;
         }
