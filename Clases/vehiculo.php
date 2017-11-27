@@ -6,7 +6,7 @@
 		private $_color;
 		private $_discapacitado;
 		private $_foto;
-		/*
+		//*
 		public function __construct($patente=NULL,$marca=NULL,$color=NULL,$discapacitado=NULL,$foto=NULL)
 		{
 		    $this->_patente=$patente;
@@ -15,7 +15,7 @@
 		    $this->_discapacitado=$discapacitado;
 		    $this->_foto=$foto;
 		}
-		*/
+		//*/
 
 		public function getPatente()
 		{ return $this->_patente; }

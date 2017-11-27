@@ -19,7 +19,16 @@ switch($operacion)
            echo "<center><p class='bg-danger'><b>Faltan completar datos</b></p></center>";  
          }else{
           $objVehiculo = new Vehiculo ($_POST['patente'],$_POST['marca'],$_POST['color'],$_POST['optradio'],$_POST['foto']);
+          //$objVehiculo->patente=$_POST['patente'];
+          //$objVehiculo->marca=$_POST['marca'];
+          //$objVehiculo->color=$_POST['color'];
+          //$objVehiculo->esdisca=$_POST['optradio'];
+          //$objVehiculo->foto=$_POST['foto'];
+
           $objEstacionamiento = new Estacionamiento($_POST['cochera'], $objVehiculo);
+          //echo $objEstacionamiento->getNumCochera();
+          //var_dump($objVehiculo);
+          //var_dump($objEstacionamiento);
           echo $objEstacionamiento->IngresarVehiculo(); 
         }
      break;

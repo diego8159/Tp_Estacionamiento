@@ -91,6 +91,12 @@ $(document).ready(function() {
                     },
                   success: function (dataRespuesta){
                         console.log(dataRespuesta);
+                        /*
+                          if (dataRespuesta) {
+                            console.log("ENTROOO");
+                          }else
+                          console.log("Erroorr");
+                        */
                         var obj = JSON.parse(dataRespuesta);
                         if(obj.msj == "Se ingreso correctamente el vehiculo"){
 
@@ -98,7 +104,7 @@ $(document).ready(function() {
                         }else{
 
                                 $("#respuesta").html("<center><p class='bg-danger'><b>"+obj.msj+"</b></p></center>");
-                        }
+                        }//*/
           
                   }
 
