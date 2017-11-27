@@ -17,7 +17,7 @@
             $this->_turno = $pTurno;
             $this->_hrIngreso = time();//Verificar
             //-----------La fecha ahora esta asignada en el alta--------------
-            //$fecha= date_default_timezone_set ('America/Argentina/Buenos_Aires'); 
+            $fecha= date_default_timezone_set ('America/Argentina/Buenos_Aires'); 
             //$this->_fecha_crecion = date("Y-m-d");
         }
 

@@ -82,7 +82,7 @@ $cocherasOcupadas = traerCocherasOcupadas();
                                                                  ValidarSelect($cocherasDisponibles , "3_1"); 
                                                                  ValidarSelect($cocherasDisponibles , "3_2"); 
                                                                  ValidarSelect($cocherasDisponibles , "3_3");  
-                                                                  ?>
+                                                                ?>
                                                             </optgroup>
                                                    
                                                 </select>
@@ -92,5 +92,5 @@ $cocherasOcupadas = traerCocherasOcupadas();
                                             </div>            
                   
                 <div class="form-group">      
-                   <input class="btn btn-primary btnmover "type="button" value="Mover de cochera" name="movercochera">
+                   <input class="btn btn-primary btnmover " type="button" value="Mover de cochera" name="movercochera">
                </div>

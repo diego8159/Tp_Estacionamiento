@@ -9,7 +9,7 @@ $operacion = $_POST['operacion'];
 session_start();
 switch($operacion)
 {
-    case "alta"://Agregar un metodo para guardar foto en carpeta.
+    case "alta"://Funciona / Agregar un metodo para guardar foto en carpeta.
         if(empty($_POST['patente']) || 
            empty($_POST['marca']) ||
            empty($_POST['color']) ||
@@ -33,7 +33,7 @@ switch($operacion)
         }
      break;
 
-     case "mostrar":
+     case "mostrar"://Funciona
        $patente = $_POST['patente'];
        if(empty($patente)){
           echo "<center><p class='bg-danger'><b>Faltan completar datos</b></p></center>";
@@ -47,7 +47,7 @@ switch($operacion)
         echo Estacionamiento::retirarVehiculo($patente);
      break;
 
-     case "verCocherasOcupadas":
+     case "verCocherasOcupadas"://Funciona
         $respuesta = Estacionamiento::verCocherasOcupadas();  
         echo $respuesta;
      break;
@@ -56,7 +56,7 @@ switch($operacion)
         Estacionamiento::modificarVehiculo();
      break;
 
-     case "actualizar":
+     case "actualizar"://Funciona/Registrar...
        $patente = $_POST['patente'];
        $marca = $_POST['marca'];
        $color = $_POST['color'];
@@ -90,21 +90,20 @@ switch($operacion)
        }else{   
          $cantidad= update($oldpatente,$patente,$marca,$color,$esDisca);
          if($cantidad>0){
-           
-           registrarOperacion($_SESSION['usuario'],'modificar',date('Y-m-d'),$numCochera);
-         echo "<center><p class='bg-success'><b>Se actualizo correctamente el vehiculo</b></p></center>";
+            //Rejistrar operacion modificar.
+            echo "<center><p class='bg-success'><b>Se actualizo correctamente el vehiculo</b></p></center>";
          }
         
        }
      break;
 
-     case "movercochera":
+     case "movercochera"://Funciona/Registrar...
     
        $oldcochera = $_POST['oldnumcochera'];
        $newcochera = $_POST['newnumcochera'];
        $retorno = updateDeCochera($oldcochera,$newcochera);
        if($retorno){
-         registrarOperacion($_SESSION['usuario'],'mover',date('Y-m-d'),$newcochera);
+         //Registrar la operacion mover.
        }
      break;
 

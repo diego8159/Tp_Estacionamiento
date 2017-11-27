@@ -220,16 +220,16 @@ include_once "Clases/AccesoDatos.php";
         return false;
     }
 
-    function Update ($oldpatente,$newpatente,$marca,$color,$esDisca)
+    function Update ($oldpatente,$newpatente,$marca,$color,$esDisca)//Funciona
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-        $consulta = $objetoAccesoDato->RetornarConsulta(" UPDATE cocheras SET patente = '$newpatente', marca = '$marca',color = '$color', esDisca = '$esDisca' WHERE patente = '$oldpatente' ");
+        $consulta = $objetoAccesoDato->RetornarConsulta(" UPDATE operaciones SET patente = '$newpatente', marca = '$marca',color = '$color', esDisca = '$esDisca' WHERE patente = '$oldpatente' ");
         $resultado = $consulta->execute();
         $cantidad = $consulta->rowCount();
         return $cantidad;   
     }
 
-    function traerPatentes()//Probando...
+    function traerPatentes()//Funciona
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT patente,id_empleado_ingreso FROM  operaciones");
@@ -256,17 +256,17 @@ include_once "Clases/AccesoDatos.php";
         }
     }
 
-    function traerCocherasOcupadas()
+    function traerCocherasOcupadas()//Funciona
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT numCochera FROM  cocheras");
+	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT numCochera FROM  operaciones");
 	    $resultado = $consulta->execute();
         $cocheras =  $consulta->fetchAll();
 
         return $cocheras;
     }
 
-    function ValidarSelect($cocheras , $piso)
+    function ValidarSelect($cocheras , $piso)//Probando...
     {
         $PisoDeCochera= explode("_",$piso);
         for($i=0;$i<count($cocheras);$i++)
@@ -278,10 +278,10 @@ include_once "Clases/AccesoDatos.php";
         }
     }
 
-    function updateDeCochera($oldcochera,$newcochera)
+    function updateDeCochera($oldcochera,$newcochera)//Funciona
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-        $consulta = $objetoAccesoDato->RetornarConsulta(" UPDATE cocheras SET numCochera = '$newcochera' WHERE numCochera = '$oldcochera' ");
+        $consulta = $objetoAccesoDato->RetornarConsulta(" UPDATE operaciones SET numCochera = '$newcochera' WHERE numCochera = '$oldcochera' ");
         $resultado = $consulta->execute();
         if($resultado)
         {

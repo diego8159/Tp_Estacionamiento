@@ -191,10 +191,10 @@ include_once '../funciones.php';
         }
       }//Fin retirarVehiculo
 
-      public static function verCocherasOcupadas()
+      public static function verCocherasOcupadas()//Funciona
       {
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-            $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT numCochera,patente FROM cocheras"); 
+            $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT numCochera,patente FROM operaciones"); 
             $consulta->execute();
             $cantidad = $consulta->rowCount();
             $json_array = array(); 
@@ -255,7 +255,7 @@ include_once '../funciones.php';
       public static function ModificarVehiculo($oldpatente,$newpatente,$color,$marca)
       {
           $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-          $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE cocheras SET patente = '$newpatente', marca = '$marca',color = '$color' WHERE patente = '$oldpatente'");
+          $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE operaciones SET patente = '$newpatente', marca = '$marca',color = '$color' WHERE patente = '$oldpatente'");
           $resultado = $consulta->execute();
           $cantidad = $consulta->rowCount();
           $objeto = new stdClass();
