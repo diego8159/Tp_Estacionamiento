@@ -37,10 +37,10 @@
                 </button>
         </div>
         <div class="col-xs-2">
-                <input type="text" class="form-control  input-sm" name="fecha1" id="fecha1" placeholder="ejemplo desde: 2017-07-13" >
+                <input type="text" class="form-control  input-sm" name="fecha1" id="fecha1" placeholder="ej. desde: 2017-07-13" >
         </div>
          <div class="col-xs-2">
-                <input type="text" class="form-control  input-sm" name="fecha2" id="fecha2" placeholder="ejemplo hasta: 2017-07-13" >
+                <input type="text" class="form-control  input-sm" name="fecha2" id="fecha2" placeholder="ej. hasta: 2017-07-13" >
          </div>
 </div>
 

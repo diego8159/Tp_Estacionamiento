@@ -20,7 +20,7 @@ include_once "Clases/AccesoDatos.php";
                                     <!-- Inicia Menu -->
                                     <div class="collapse navbar-collapse" id="navegacion-fm">
                                         <ul class="nav navbar-nav">
-                                            <li class="active"><a href="index.php">Inicio</a></li>
+                                            <li><a href="index.php">Inicio</a></li>
                                             <li class="dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                                                     Listados

@@ -190,19 +190,23 @@ switch($operacion){
     break;
 
     case'verinfoautosestacionados':
-      $fecha =  $_POST['fecha'];
+      $fecha =  $_POST['fecha'];      
+
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM  operaciones WHERE fechaingreso = '$fecha' ");
+      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM operaciones WHERE SUBSTRING(fecha_hora_ingreso, 1, 10) = '$fecha' ");//Use SUBSTRING para solo usar los caracteres del 1 al 10, y el resto no.
       $consulta->execute();
       $cantidad = $consulta->rowCount();
 
       if($cantidad > 0){
 
            echo "<center><div class='text-success bg-warning' style='border: 5px groove #006600;'>";
-           while ($row = $consulta->fetch()) 
+        while ($row = $consulta->fetch()) 
   	     {
-  	
-              echo "Cochera: ".$row['numCochera']." Horario ingreso: ".$row['hsingreso']." Horario salida: ".$row['hssalida']."Cuanto pago: ".$row['importe']."<br>";
+              $fecha_hora_ingresoArray = explode(' / ',$row['fecha_hora_ingreso']);
+              $hsIng = $fecha_hora_ingresoArray[1];
+              $fecha_hora_salidaArray = explode(' / ',$row['fecha_hora_salida']);
+              $hsSal = $fecha_hora_salidaArray[1];
+              echo "Cochera: ".$row['numCochera']." Horario ingreso: ".$hsIng." Horario salida: ".$hsSal."Cuanto pago: ".$row['importe']."<br>";
   	     }
            echo "</div></center>";
       }else{
@@ -213,18 +217,22 @@ switch($operacion){
     case'verinfoautosestacionados2':
       $fechaDesde =  $_POST['fechaDesde'];
       $fechaHasta =  $_POST['fechaHasta'];
+
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM operaciones WHERE  fechaingreso BETWEEN '$fechaDesde'  AND '$fechaHasta' "); 
+      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM operaciones WHERE fecha_hora_ingreso BETWEEN '$fechaDesde' AND '$fechaHasta' "); 
       $consulta->execute();
       $cantidad = $consulta->rowCount();
         if($cantidad > 0){
 
            echo "<center><div class='text-success bg-warning' style='border: 5px groove #006600;'>";
            while ($row = $consulta->fetch()) 
-  	     {
-  	
-              echo "Cochera: ".$row['numCochera']." Horario ingreso: ".$row['hsingreso']." Horario salida: ".$row['hssalida']."Cuanto pago: ".$row['importe']."<br>";
-  	     }
+    	     {
+    	          $fecha_hora_ingresoArray = explode(' / ',$row['fecha_hora_ingreso']);
+                $hsIng = $fecha_hora_ingresoArray[1];
+                $fecha_hora_salidaArray = explode(' / ',$row['fecha_hora_salida']);
+                $hsSal = $fecha_hora_salidaArray[1];
+                echo "Cochera: ".$row['numCochera']." Horario ingreso: ".$hsIng." Horario salida: ".$hsSal." Cuanto pago: ".$row['importe']."<br>";
+    	     }
            echo "</div></center>";
       }else{
           echo "<center><b class='bg-danger'>No se encontro informacion<b></center><br>";

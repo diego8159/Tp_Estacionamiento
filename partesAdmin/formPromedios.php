@@ -33,7 +33,7 @@
                </select>
     </div>
     <div class="col-xs-3"> 
-               <input type="text" class="form-control  " name="empleadoname" id="empleadoname" placeholder="Nombre de empleado ej empleado1" >
+               <input type="text" class="form-control  " name="empleadoname" id="empleadoname" placeholder="Nombre de empleado ej. 2" >
     </div>
     <div class="col-xs-3"> 
                 <button type="button" class="btn btn-success btn-md " id="btnverpromedio">
@@ -65,7 +65,7 @@
                </select>
     </div>
     <div class="col-xs-3"> 
-               <input type="text" class="form-control" name="cocheraname" id="cocheraname" placeholder="Numero de cochera ej 1_3" >
+               <input type="text" class="form-control" name="cocheraname" id="cocheraname" placeholder="Numero de cochera ej. 2_3" >
     </div>
     <div class="col-xs-3"> 
                 <button type="button" class="btn btn-success btn-md " id="btnverpromedio2">
@@ -97,7 +97,7 @@
                </select>
     </div>
     <div class="col-xs-3"> 
-               <input type="text" class="form-control" name="patentename" id="patentename" placeholder="Numero de patente ej lyt290" >
+               <input type="text" class="form-control" name="patentename" id="patentename" placeholder="Numero de patente ej. ddd222" >
     </div>
     <div class="col-xs-3"> 
                 <button type="button" class="btn btn-success btn-md " id="btnverpromedio3">

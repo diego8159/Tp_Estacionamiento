@@ -1,3 +1,19 @@
 UPDATE `operaciones` SET `ocupada`= 'si' WHERE (patente = 'ghj554')
 
 SELECT * FROM `operaciones` WHERE (patente = 'ghj554') AND (ocupada = 'si')
+
+SELECT * FROM operaciones WHERE SUBSTRING(fecha_hora_ingreso, 1, 10) = '$fecha'
+
+SELECT op.numCochera, op.fecha_hora_ingreso, op.fecha_hora_salida, op.importe FROM registrooperaciones as reg, operaciones as op WHERE reg.fecha BETWEEN '2017-11-28' AND '2017-11-28'
+
+//--------------------------------------
+
+SELECT fecha_hora_ingreso,importe FROM operaciones WHERE id_empleado_ingreso = 2 AND EXTRACT(MONTH FROM SUBSTRING(fecha_hora_ingreso, 1, 10)) = '11'
+
+SELECT SUBSTRING(fecha_hora_ingreso, 1, 10),importe FROM operaciones WHERE id_empleado_ingreso = $empleado AND EXTRACT(MONTH FROM fecha_hora_ingreso) = '$mes'
+
+SELECT SUBSTRING(fecha_hora_ingreso, 1, 10) as fecha,importe FROM operaciones WHERE id_empleado_ingreso = 2 AND EXTRACT(MONTH FROM fecha_hora_ingreso) = '11'
+
+-------------------------------------
+Pagina usada para los graficos:
+https://www.jose-aguilar.com/blog/graficos-con-php-y-google-charts/
