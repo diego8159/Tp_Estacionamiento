@@ -113,7 +113,7 @@ include_once "Clases/AccesoDatos.php";
     function estaOcupadaCochera($numCochera)//Verificada
     {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM operaciones WHERE numCochera = '$numCochera'");
+	    $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM operaciones WHERE numCochera = '$numCochera' AND (ocupada = 'si')");
 	    $resultado = $consulta->execute();
         $cantidad = $consulta->rowCount(); 
         if($cantidad >  0 )
@@ -133,7 +133,7 @@ include_once "Clases/AccesoDatos.php";
             { return false; }
     }
 
-    function calcularImporte($hsIngreso,$fechaIngreso,$hsSalida,$fechaSalida)
+    function calcularImporte($hsIngreso,$fechaIngreso,$hsSalida,$fechaSalida)//Probando...
     {
         $diaIngresoArray = explode('-',$fechaIngreso);
         $diaIngreso =(int) $diaIngresoArray[2];
@@ -290,10 +290,11 @@ include_once "Clases/AccesoDatos.php";
         }
     }
 
-    function registrarOperacion($usuario,$tipo,$fecha,$numcochera)
+    function registrarOperacion($usuario,$tipo,$fecha,$numcochera)//-->>> Verificar....
     {
        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-       $consulta = $objetoAccesoDato->RetornarConsulta("INSERT into registrooperaciones (nombreempleado,tipo,fecha,numcochera)values('$usuario','$tipo','$fecha','$numcochera');"); 		                                                                                                                                                                                                                                                                                                                           
+       $consulta = $objetoAccesoDato->RetornarConsulta("INSERT into registrooperaciones (usuario,tipo,fecha,numcochera)values('$usuario','$tipo','$fecha','$numcochera');");
+
        $resultado = $consulta->execute();  
     }
     

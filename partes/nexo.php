@@ -56,7 +56,7 @@ switch($operacion)
         Estacionamiento::modificarVehiculo();
      break;
 
-     case "actualizar"://Funciona/Registrar...
+     case "actualizar"://Funciona
        $patente = $_POST['patente'];
        $marca = $_POST['marca'];
        $color = $_POST['color'];
@@ -90,20 +90,20 @@ switch($operacion)
        }else{   
          $cantidad= update($oldpatente,$patente,$marca,$color,$esDisca);
          if($cantidad>0){
-            //Rejistrar operacion modificar.
+            registrarOperacion($_SESSION['usuario'],'modificar',date('Y-m-d'),$numCochera);
             echo "<center><p class='bg-success'><b>Se actualizo correctamente el vehiculo</b></p></center>";
          }
         
        }
      break;
 
-     case "movercochera"://Funciona/Registrar...
+     case "movercochera"://Funciona
     
        $oldcochera = $_POST['oldnumcochera'];
        $newcochera = $_POST['newnumcochera'];
        $retorno = updateDeCochera($oldcochera,$newcochera);
        if($retorno){
-         //Registrar la operacion mover.
+         registrarOperacion($_SESSION['usuario'],'mover',date('Y-m-d'),$newcochera);
        }
      break;
 

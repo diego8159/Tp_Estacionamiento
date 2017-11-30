@@ -1,4 +1,4 @@
-<?php
+registrooperaciones<?php
 //sleep(1);
 include_once '../Clases/AccesoDatos.php';
 include_once '../Clases/estacionamiento.php';
@@ -9,37 +9,45 @@ $operacion = $_POST['operacion'];
 
 switch($operacion){
 
-    case 'buscarreportes':
+    case 'buscarreportes'://--------> Funciona(Agregar hora(ver si se puede traer de la clase empleado))
 
       $nombreempleado = $_POST['nombreempleado'];
       $desde = $_POST['desde'];
       $hasta = $_POST['hasta'];
 
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM registroempleados WHERE nombre='$nombreempleado' AND fechaing BETWEEN '$desde'  AND '$hasta' "); 
+      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM registrooperaciones WHERE usuario='$nombreempleado' AND fecha BETWEEN '$desde'  AND '$hasta' "); 
       $consulta->execute();
       echo "<center><div class='text-success bg-warning' style='border: 5px groove #006600;'>";
       while ($row = $consulta->fetch()) 
   	    {
-          echo "Nombre: ".$row['nombre']." Dia: ".$row['fechaing']." Horario: ".$row['hsing']."<br>";
+          echo "Usuario: ".$row['usuario']." Fecha: ".$row['fecha']."<br>";
   	    }
       echo "</div></center>";
     break;
 
-    case'buscarreportesporfecha':
+    case'buscarreportesporfecha'://--------> Funciona(Agregar hora(ver si se puede traer de la clase empleado))
 
       $nombreempleado = $_POST['nombreempleado'];
       $fecha = $_POST['fecha'];
 
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM registroempleados WHERE nombre='$nombreempleado' AND fechaing = '$fecha' "); 
-      $consulta->execute();
-       echo "<center><div class='text-success bg-warning' style='border: 5px groove #006600;'>";
-      while ($row = $consulta->fetch()) 
-  	  {
-        echo "Nombre: ".$row['nombre']." Dia: ".$row['fechaing']." Horario: ".$row['hsing']."<br>";
-  	  }
-      echo "</div></center>";
+      $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM registrooperaciones WHERE (usuario='$nombreempleado') AND (fecha = '$fecha')"); 
+      $resultado = $consulta->execute();
+      $cantidad = $consulta->rowCount();
+      if($cantidad > 0)
+      {
+          echo "<center><div class='text-success bg-warning' style='border: 5px groove #006600;'>";
+          while ($row = $consulta->fetch()) 
+          {
+            //$fecha_hora_ingresoArray = explode(' / ',$row['fecha_hora_ingreso']);
+            //$hsIng = $fecha_hora_ingresoArray[1];
+            //$fechIng = $fecha_hora_ingresoArray[0];
+            echo "Usuario: ".$row['usuario']." Fecha: ".$row['fecha']."<br>";
+          }
+          echo "</div></center>";
+      } 
+
     break;
 
     case 'altaempleado'://--------> Funciona
@@ -89,11 +97,11 @@ switch($operacion){
       }
     break;
 
-    case 'veroperaciones':
+    case 'veroperaciones'://--------> Funciona
       $usuario =  $_POST['usuario'];
       $fecha =  $_POST['fecha'];
       $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM registrooperaciones WHERE nombreempleado = '$usuario' AND fecha = '$fecha'");
+      $consulta = $objetoAccesoDato->RetornarConsulta(" SELECT * FROM registrooperaciones WHERE usuario = '$usuario' AND fecha = '$fecha'");
       $consulta->execute();
       $cantidad = $consulta->rowCount();
       if($cantidad > 0){
@@ -102,7 +110,7 @@ switch($operacion){
            while ($row = $consulta->fetch()) 
   	     {
   	
-               echo "Nombre: ".$row['nombreempleado']." Operacion: ".$row['tipo']."<br>";
+               echo "Nombre: ".$row['usuario']." Operacion: ".$row['tipo']."<br>";
   	     }
           echo "<font color='red'>cantidad total: ".$cantidad."</font>";
           echo "</div></center>";

@@ -26,6 +26,7 @@ include_once '../funciones.php';
           $this->_objVehiculo =  $objVehiculo ;   
           $this->_numCochera=$numCochera;
           $this->_empleado= $_SESSION['usuario'];
+          $fecha= date_default_timezone_set ('America/Argentina/Buenos_Aires');
       }
 
       //--------------------------GETERS----------------------
@@ -64,8 +65,8 @@ include_once '../funciones.php';
           }
           if($validacion == 0)
           {
-              $fecha= date_default_timezone_set ('America/Argentina/Buenos_Aires'); 
-              $hsIngreso = date("H:i:s");            
+              //$fecha= date_default_timezone_set ('America/Argentina/Buenos_Aires'); 
+              $hsIngreso = date("H:i");            
               //$this->_hsEntradaVehiculo = $hsIngreso;
               $this->_fechaIngreso =date('Y-m-d');
               $fecha_hora_ingreso = $this->_fechaIngreso . " / " . $hsIngreso;
@@ -76,40 +77,39 @@ include_once '../funciones.php';
               //$id_empleado_salida= "";
               //$tiempo= NULL;
               //$importe= NULL;
-              $tipo= 'alta';
               /*
                 Para registrar tiempo/importe traer los datos por JSON en el metodo calcular importe.
               */
 
               $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-              $consulta = $objetoAccesoDato->RetornarConsulta("SELECT ingEmp.id_empleado FROM ingresos_empleados as ingEmp WHERE ($_SESSION[id] = ingEmp.id_empleado)"); 
-              $resultado = $consulta->execute();
-              $row = $consulta->fetch();
+              $consulta1 = $objetoAccesoDato->RetornarConsulta("SELECT ingEmp.id_empleado FROM ingresos_empleados as ingEmp WHERE ($_SESSION[id] = ingEmp.id_empleado)"); 
+              $resultado1 = $consulta1->execute();
               /*------------------------------------------------------*/
-              while ($row = $consulta->fetch()) {
+              while ($row = $consulta1->fetch()) {
                   $id_empleado_ingreso= $row['id_empleado'];
 
                   $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-                  $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,foto,id_empleado_ingreso,fecha_hora_ingreso,tipo)values(:numCochera,:esDisca,:ocupada,:marca,:patente,:color,:foto,:id_empleado_ingreso,:fecha_hora_ingreso,:tipo)");
-                  $consulta->bindValue(':numCochera',$this->_numCochera, PDO::PARAM_STR);
-                  $consulta->bindValue(':esDisca', $this->_objVehiculo->getDiscapacitado(), PDO::PARAM_STR);
-                  $consulta->bindValue(':ocupada', 'si', PDO::PARAM_STR);
-                  $consulta->bindValue(':marca', $this->_objVehiculo->getMarca(), PDO::PARAM_STR);
-                  $consulta->bindValue(':patente', $this->_objVehiculo->getPatente(), PDO::PARAM_STR);
-                  $consulta->bindValue(':color', $this->_objVehiculo->getColor(), PDO::PARAM_STR);
-                  $consulta->bindValue(':foto', $this->_objVehiculo->getFoto(), PDO::PARAM_STR);
-                  $consulta->bindValue(':id_empleado_ingreso', $id_empleado_ingreso, PDO::PARAM_INT);
-                  $consulta->bindValue(':fecha_hora_ingreso', $fecha_hora_ingreso, PDO::PARAM_STR);
-                  //$consulta->bindValue(':id_empleado_salida', $id_empleado_salida, PDO::PARAM_INT);
-                  //$consulta->bindValue(':fecha_hora_salida', $fecha_hora_salida, PDO::PARAM_STR);
-                  //$consulta->bindValue(':tiempo', $tiempo, PDO::PARAM_INT);
-                  //$consulta->bindValue(':importe', $importe, PDO::PARAM_STR);
-                  $consulta->bindValue(':tipo', $tipo, PDO::PARAM_STR);
-                  $resultado= $consulta->execute();   
-                  $objetoAccesoDato->RetornarUltimoIdInsertado(); 
-                  if($resultado)
+                  $consulta2 =$objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,foto,id_empleado_ingreso,fecha_hora_ingreso)values(:numCochera,:esDisca,:ocupada,:marca,:patente,:color,:foto,:id_empleado_ingreso,:fecha_hora_ingreso)");
+                  $consulta2->bindValue(':numCochera',$this->_numCochera, PDO::PARAM_STR);
+                  $consulta2->bindValue(':esDisca', $this->_objVehiculo->getDiscapacitado(), PDO::PARAM_STR);
+                  $consulta2->bindValue(':ocupada', 'si', PDO::PARAM_STR);
+                  $consulta2->bindValue(':marca', $this->_objVehiculo->getMarca(), PDO::PARAM_STR);
+                  $consulta2->bindValue(':patente', $this->_objVehiculo->getPatente(), PDO::PARAM_STR);
+                  $consulta2->bindValue(':color', $this->_objVehiculo->getColor(), PDO::PARAM_STR);
+                  $consulta2->bindValue(':foto', $this->_objVehiculo->getFoto(), PDO::PARAM_STR);
+                  $consulta2->bindValue(':id_empleado_ingreso', $id_empleado_ingreso, PDO::PARAM_INT);
+                  $consulta2->bindValue(':fecha_hora_ingreso', $fecha_hora_ingreso, PDO::PARAM_STR);
+                  //$consulta2->bindValue(':id_empleado_salida', $id_empleado_salida, PDO::PARAM_INT);
+                  //$consulta2->bindValue(':fecha_hora_salida', $fecha_hora_salida, PDO::PARAM_STR);
+                  //$consulta2->bindValue(':tiempo', $tiempo, PDO::PARAM_INT);
+                  //$consulta2->bindValue(':importe', $importe, PDO::PARAM_STR);
+                  $resultado2= $consulta2->execute();   
+                  //$objetoAccesoDato->RetornarUltimoIdInsertado(); 
+                  if($resultado2)
                   {
+                      registrarOperacion($this->_empleado,'alta',date('Y-m-d'),$this->_numCochera);
                       $json['msj'] = "Se ingreso correctamente el vehiculo";
+                      break;
                   }
               }
           }
@@ -120,7 +120,7 @@ include_once '../funciones.php';
       {
           sleep(1);
           $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-          $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM  operaciones WHERE patente = '$patente'");
+          $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM  operaciones WHERE patente = '$patente' AND (ocupada = 'si')");
           $resultado = $consulta->execute();
           $cantidad = $consulta->rowCount();
           $datos = array();
@@ -175,11 +175,11 @@ include_once '../funciones.php';
         $json['importe'] = Estacionamiento::addOperaciones($patente);  
 
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-        $consulta2 = $objetoAccesoDato->RetornarConsulta("SELECT numCochera FROM  cocheras WHERE patente = '$patente'");
+        $consulta2 = $objetoAccesoDato->RetornarConsulta("SELECT numCochera FROM  operaciones WHERE patente = '$patente'");
         $resultado2 = $consulta2->execute();
         $numcochera = $consulta2->fetch();
 
-        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM  cocheras WHERE patente = '$patente'");
+        $consulta = $objetoAccesoDato->RetornarConsulta("DELETE FROM operaciones WHERE (patente = '$patente') AND (ocupada = 'si')");
         $resultado = $consulta->execute();
         $cantidad = $consulta->rowCount();
               
@@ -217,17 +217,27 @@ include_once '../funciones.php';
           $hsSalida = date("H:i");
           $fechaSalida =date('Y-m-d'); 
           $empleado = $_SESSION['usuario'];
+          $fecha_hora_salida = $fechaSalida . " / " . $hsSalida;
 
           $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-          $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM cocheras WHERE patente = '$patente'"); 
+          $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM operaciones WHERE patente = '$patente'"); 
           $resultado = $consulta->execute(); 
        
           $importe = 0;
           while ($row = $consulta->fetch()) 
           {
-            $importe = calcularImporte($row['hsingreso'],$row['fechaingreso'],$hsSalida,$fechaSalida);
-            $consulta = $objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,hsingreso,fechaingreso,empingreso, hssalida, empsalida,fechasalida,importe)values('".$row['numCochera']."','". $row['esDisca'] ."','".$row['ocupada']."','". $row['marca'] ."','". $row['patente'] ."','". $row['color']  ."', '".$row['hsingreso']."', '".$row['fechaingreso']."' ,'".$row['empingreso']."','$hsSalida','$empleado','$fechaSalida','$importe')");                                                                                                                                                                                                                                                                                                                                
-            $resultado = $consulta->execute();
+            $id_empleado_salida= $row['id_empleado_ingreso'];
+            $fecha_hora_ingresoArray = explode(' / ',$row['fecha_hora_ingreso']);
+            $hsIng = $fecha_hora_ingresoArray[1];
+            $fechIng = $fecha_hora_ingresoArray[0];
+            $importe = calcularImporte($hsIng,$fechIng,$hsSalida,$fechaSalida);
+
+            $ahora=date("Y-m-d H:i:s");              
+            $tiempo = strtotime($fecha_hora_salida) - strtotime($row['fecha_hora_ingreso']);//Probar fecha_hora_ingresoArray
+            $row['ocupada']= 'no';
+
+            $consulta2 = $objetoAccesoDato->RetornarConsulta("INSERT into operaciones (numCochera,esDisca,ocupada,marca,patente,color,foto,id_empleado_ingreso,fecha_hora_ingreso,id_empleado_salida,fecha_hora_salida,tiempo,importe)values('".$row['numCochera']."','". $row['esDisca'] ."','".$row['ocupada']."','". $row['marca'] ."','". $row['patente'] ."','". $row['color']  ."', '".$row['foto']."', '".$row['id_empleado_ingreso']."' ,'".$row['fecha_hora_ingreso']."','$id_empleado_salida','$fecha_hora_salida','$tiempo','$importe')");                                                                                                                                                                                                                                                                                                                                
+            $resultado2 = $consulta2->execute();
             $retorno = $importe;
             return $retorno;
           }          

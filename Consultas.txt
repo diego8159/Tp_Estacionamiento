@@ -1,0 +1,3 @@
+UPDATE `operaciones` SET `ocupada`= 'si' WHERE (patente = 'ghj554')
+
+SELECT * FROM `operaciones` WHERE (patente = 'ghj554') AND (ocupada = 'si')
